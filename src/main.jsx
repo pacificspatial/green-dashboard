@@ -1,23 +1,34 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import dayjs from 'dayjs'
-import utc from "dayjs/plugin/utc.js"
-import timezone from "dayjs/plugin/timezone.js"
-import { getApps, initializeApp } from "firebase/app"
+import dayjs from "dayjs"
+import utc from "dayjs/plugin/utc"
+import timezone from "dayjs/plugin/timezone"
+import {ComposeProvider} from "./components/composeProvider"
+import {AppDataProvider} from "@team4am/fp-core"
+import {DialogProvider} from "@team4am/fp-core"
+import { ToastContainer } from "react-toastify"
+import {LocalizationProvider} from "@mui/x-date-pickers"
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs"
 import "dayjs/locale/ja"
 import "./main.css"
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material"
-import { LocalizationProvider } from "@mui/x-date-pickers"
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
-import { ComposeProvider } from "@_components/composeProvider.jsx"
-import { DialogProvider } from "@_components/dialog.jsx"
-import { ToastContainer } from "react-toastify"
-import _ from "ansuko"
-import { ErrorBoundary } from "react-error-boundary"
-import ErrorFallback from "@_src/error.jsx"
-import { AppDataProvider } from "@team4am/fp-core"
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import {UserDataProvider} from "@_views/user/data/index.jsx"
+import {getApps, initializeApp} from "firebase/app"
+import _ from "ansuko"
+import {ErrorBoundary} from "react-error-boundary"
+import ErrorFallback from "./error.jsx"
+
+// ライトテーマを作成
+const lightTheme = createTheme({
+    palette: {
+        mode: 'light', // これが重要！
+    },
+});
+
+// dayjsの設定
 dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.tz.setDefault("Asia/Tokyo")
@@ -35,27 +46,20 @@ if (_.size(getApps()) === 0) {
     })
 }
 
-// ライトテーマを作成
-const lightTheme = createTheme({
-    palette: {
-        mode: 'light', // これが重要！
-    },
-});
-
 document.title = import.meta.env.VITE_PROJECT_SHORT_NAME
 
 createRoot(document.getElementById('root')).render(
-    <StrictMode>
-        <ThemeProvider theme={lightTheme}>
-            <CssBaseline />
-            <ErrorBoundary FallbackComponent={ErrorFallback} onError={console.error}>
-                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ja">
-                    <ComposeProvider providers={[DialogProvider, AppDataProvider]}>
-                        <App />
-                        <ToastContainer />
-                    </ComposeProvider>
-                </LocalizationProvider>
-            </ErrorBoundary>
-        </ThemeProvider>
-    </StrictMode>,
+  <StrictMode>
+      <ThemeProvider theme={lightTheme}>
+          <CssBaseline />
+          <ErrorBoundary FallbackComponent={ErrorFallback} onError={console.error}>
+              <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ja">
+                  <ComposeProvider providers={[DialogProvider, AppDataProvider]}>
+                      <App />
+                      <ToastContainer />
+                  </ComposeProvider>
+              </LocalizationProvider>
+          </ErrorBoundary>
+      </ThemeProvider>
+  </StrictMode>,
 )

@@ -1,18 +1,19 @@
 import {
+    Backdrop,
     Box,
-    Button,
+    Button, CircularProgress,
     Dialog, DialogActions, DialogContent,
     DialogContentText,
     DialogTitle,
     FormControl,
     InputLabel,
-    OutlinedInput
+    OutlinedInput,
+    Typography,
 } from "@mui/material";
-import { useCallback, useState } from "react";
-import { useDialog } from "@_components/dialog.jsx";
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth"
-import LoadingView from "@_views/loading.jsx"
-import { UseApiManager } from "@team4am/fp-core"
+import {useCallback, useEffect, useState} from "react";
+import UseApiManager from "../manager/api.js";
+import {useDialog} from "@team4am/fp-core";
+import {getAuth, sendPasswordResetEmail, signInWithEmailAndPassword} from "firebase/auth"
 
 const styles = {
     root: {
@@ -26,7 +27,7 @@ const styles = {
     inputBox: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '12px',
+        gap: '16px',
         margin: '1rem',
     },
     input: {
@@ -44,6 +45,11 @@ const styles = {
         justifyContent: "center",
         alignItems: "center",
         zIndex: 1,
+    },
+    loginError: {
+        color: 'red',
+        fontSize: '14px',
+        marginBottom: '1rem',
     }
 }
 
@@ -54,7 +60,7 @@ const LoginView = () => {
     const [openForgotPassword, setOpenForgotPassword] = useState(false)
     const [forgotEmail, setForgotEmail] = useState()
     const { openAlert } = useDialog()
-    const { PostOne } = UseApiManager()
+    const [loginError, setLoginError] = useState(null)
     const [loading, setLoading] = useState(false)
     const auth = getAuth()
 
@@ -63,7 +69,14 @@ const LoginView = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then(() => setLoading(false))
             .catch(e => {
-                console.log(e.value)
+                console.log(e.code)
+                switch(e.code) {
+                    case "auth/invalid-credential":
+                        setLoginError("メールアドレスかパスワードが間違っています")
+                        break
+                    default:
+                        setLoginError("不明なエラー")
+                }
             })
             .finally(() => setLoading(false))
     }, [email, password])
@@ -74,36 +87,40 @@ const LoginView = () => {
         try {
             await sendPasswordResetEmail(auth, forgotEmail)
             openAlert("再設定用のメールを送信しました")
-        } catch (e) {
+        } catch(e) {
             openAlert(`送信に失敗しました\n${e}`)
         } finally {
             setLoading(false)
         }
     }, [forgotEmail])
 
+    useEffect(() => {
+        setLoginError(null)
+    }, [email, password]);
+
     return (
         <Box style={styles.root}>
             <Box style={styles.inputBox}>
                 <FormControl size="small">
-                    <InputLabel style={{ background: `white`, }}>メールアドレス</InputLabel>
+                    <InputLabel style={{background: `white`, }}>メールアドレス</InputLabel>
                     <OutlinedInput value={email} style={styles.input} onChange={e => setEmail(e.target.value)} />
                 </FormControl>
                 <FormControl size="small">
-                    <InputLabel style={{ background: `white` }}>パスワード</InputLabel>
+                    <InputLabel style={{background: `white`}}>パスワード</InputLabel>
                     <OutlinedInput value={password} style={styles.input} type="password" onChange={e => setPassword(e.target.value)} />
                 </FormControl>
             </Box>
-
+            <Typography style={styles.loginError}>{loginError ?? "　"}</Typography>
             <Button onClick={onLogin} style={styles.loginButton} variant="contained">ログイン</Button>
             <Button onClick={() => setOpenForgotPassword(true)} style={styles.forgotPassword}>パスワードを忘れたら</Button>
             <Dialog open={openForgotPassword}>
                 <DialogTitle>パスワードの再発行</DialogTitle>
-                <DialogContent style={{ display: "flex", flexDirection: "column" }}>
+                <DialogContent style={{display: "flex", flexDirection: "column"}}>
                     <DialogContentText>パスワードを再発行します、登録メールアドレスを入力してください</DialogContentText>
-                    <Box style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+                    <Box style={{display: "flex", justifyContent: "center", marginTop: "1rem"}}>
                         <FormControl size="small">
-                            <InputLabel style={{ background: "white" }}>登録メールアドレス</InputLabel>
-                            <OutlinedInput style={{ width: "250px" }} value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} />
+                            <InputLabel style={{background: "white"}}>登録メールアドレス</InputLabel>
+                            <OutlinedInput style={{width: "250px"}} value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} />
                         </FormControl>
                     </Box>
                 </DialogContent>
@@ -115,7 +132,9 @@ const LoginView = () => {
                     }}>キャンセル</Button>
                 </DialogActions>
             </Dialog>
-            <LoadingView open={loading} zIndex={3} message="読込中..." />
+            <Backdrop open={loading} style={styles.loading}>
+                <CircularProgress />
+            </Backdrop>
         </Box>
     )
 }

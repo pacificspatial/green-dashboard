@@ -1,0 +1,24 @@
+/* 各ボタンのツールチップをカスタマイズ */
+.maplibregl-terradraw-add-polygon-button::after {
+    content: "ポリゴン描画" !important;
+}
+
+.maplibregl-terradraw-add-rectangle-button::after {
+    content: "矩形描画" !important;
+}
+
+.maplibregl-terradraw-add-circle-button::after {
+    content: "円描画" !important;
+}
+
+.maplibregl-terradraw-select-button::after {
+    content: "選択" !important;
+}
+
+.maplibregl-terradraw-delete-selection-button::after {
+    content: "選択削除" !important;
+}
+
+.maplibregl-terradraw-delete-button::after {
+    content: "削除" !important;
+}

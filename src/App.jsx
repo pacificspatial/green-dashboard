@@ -1,13 +1,19 @@
-import {useDialog} from "@_components/dialog"
-import PropTypes from "prop-types"
-import {useEffect, useMemo} from "react"
-import {Box, Typography, Button, CircularProgress} from "@mui/material"
-import _ from "ansuko"
-import LoginView from "@_views/login"
-import AuthView from "@_views/auth"
-import MainView from "@_views/main"
-import { baseGradient } from "@_views/project/common.jsx"
-import { FieldPointApp, AppError, AppStatus, useFieldPointApp } from "@team4am/fp-core"
+import {useEffect, useMemo} from "react";
+import {useDialog, AppDataContext} from "@team4am/fp-core";
+import _ from "ansuko";
+import {Box,Button,Typography,CircularProgress} from "@mui/material";
+import RootView from "@_views/index.jsx";
+import AuthView from "@_views/auth.jsx";
+import LoginView from "@_views/login.jsx";
+import PropTypes from "prop-types";
+import UseApiManager from "./manager/api.js";
+import {
+    FieldPointApp,
+    AppError,
+    AppStatus,
+    useFieldPointApp,
+    UseAuthManager
+} from "@team4am/fp-core"
 
 const StatusMessage = {
     [AppStatus.Loading]: "起動中...",
@@ -19,7 +25,6 @@ const ErrorMessage = {
     [AppError.EnvLoadError]: "設定読込に失敗しました",
     [AppError.ColumnDefsLoadError]: "設定情報読込に失敗しました",
 }
-export const AUTH_DISABLE_CODE_LOCAL_STORAGE_KEY = "_disable_code_this_browser"
 
 const styles = {
     progress: {
@@ -29,7 +34,7 @@ const styles = {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: baseGradient,
+            background: '#d5d5d5',
         },
         box: {
             display: 'flex',
@@ -50,6 +55,7 @@ const styles = {
 }
 
 const AppContent = () => {
+
     const { status, error, logout } = useFieldPointApp()
     const { openAlert } = useDialog()
 
@@ -62,7 +68,7 @@ const AppContent = () => {
     }, [error]);
 
     if (_.isNil(status)) {
-        return <MainView />
+        return <RootView />
     }
     if (status === AppStatus.RequireLogin) {
         return <LoginView />
@@ -74,6 +80,14 @@ const AppContent = () => {
     return <ProgressView message={message} onLogout={logout} />
 }
 
+
+const App = () => (
+    <FieldPointApp>
+        <AppContent />
+    </FieldPointApp>
+)
+
+export default App
 
 const ProgressView = ({message, error, onLogout}) => {
 
@@ -93,6 +107,7 @@ const ProgressView = ({message, error, onLogout}) => {
     useEffect(() => {
 
     }, [error])
+
     return (
         <Box style={styles.progress.root}>
             <Box style={styles.progress.box}>
@@ -108,10 +123,3 @@ ProgressView.propTypes = {
     error: PropTypes.string,
     onLogout: PropTypes.func,
 }
-
-const App  = () => (
-    <FieldPointApp disableColumnDefs={true}>
-        <AppContent />
-    </FieldPointApp>
-)
-export default App

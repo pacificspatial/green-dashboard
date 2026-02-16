@@ -1,5 +1,5 @@
-import _ from "ansuko"
-import {AsYouType, parsePhoneNumber} from "libphonenumber-js"
+import _ from "ansuko";
+import {AsYouType, parsePhoneNumber} from "libphonenumber-js";
 
 
 export const waitAnimated = (func, frameCount = 0) => {
@@ -9,36 +9,10 @@ export const waitAnimated = (func, frameCount = 0) => {
     })
 }
 
-const toHalfWidth = value => String(value).split('').map(char => {
-    const code = char.charCodeAt(0);
-    // 全角は0xFF01～0xFF5E、半角は0x0021～0x007E
-    if (code >= 0xFF01 && code <= 0xFF5E) {
-        return String.fromCharCode(code - 0xFEE0);
-    }
-    return char;
-}).join('');
-
 export const waitAnimatedAsync = (frameCount = 0) => {
     return new Promise(resolve => {
         waitAnimated(resolve, frameCount)
     })
-}
-
-export const isEmpty = value => {
-    if (_.isNil(value)) { return true }
-    if (_.isNumber(value)) { return false }
-    return _.isEmpty(value)
-}
-
-export const toNumber = value => {
-    if (_.isNil(value)) { return null }
-    let v = toHalfWidth(value)
-    if (_.isNumber(v)) { return value }
-    if (typeof v === "string" && v.includes(",")) {
-        v =  _.toNumber(v.replace(/,/g, ""))
-    }
-    v =  _.toNumber(v)
-    return _.isNaN(v) ? null : v
 }
 
 export const boolIf = (value, defaultValue = false) => {
@@ -56,10 +30,8 @@ const AsYouTypeJp = new AsYouType("JP")
  */
 export const phoneNumberToJP = (phoneNumber) => phoneNumber ?
     (new AsYouType("JP").input(phoneNumber)
-            .replace("+81 ", "0")
-            .replace(" ", "-")
-            .replace(" ", "-")
-    ) : null
+        .replace("+81 ", "0")
+        .replace(" ", "-")) : null
 
 /**
  * 電話番号を+81xxxx表記にへんかｎ
@@ -68,6 +40,10 @@ export const phoneNumberToJP = (phoneNumber) => phoneNumber ?
  */
 export const phoneNumberToITN = (phoneNumber) => phoneNumber ?
     parsePhoneNumber(phoneNumber, "JP").number : null
+
+// 全角英数ー＞半角英数
+export const toHalfWidth = str => validStr(str) ? str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, s =>
+    String.fromCharCode(s.charCodeAt(0) - 0xFEE0)) : str
 
 export const kanaToFull = str => {
     if (!validStr(str)) { return str }

@@ -1,0 +1,8 @@
+
+div.ag-cell[col-id="is_delete"] div.ag-checked {
+    border-color: #271d1d !important;
+}
+
+div.ag-cell[col-id="is_delete"] div.ag-checked::after {
+    background-color: red !important;
+}
