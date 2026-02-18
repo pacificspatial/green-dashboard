@@ -1,6 +1,6 @@
-# 公園管理台帳システム
+# 樹木管理ダッシュボード
 
-![概要](./img/echigo_parkmanagement_mapandlist_2024.png)
+![概要](./img/greendashboard_001.png)
 
 ## 更新履歴
 | 更新日時     | リリース       | 更新内容                                       |
