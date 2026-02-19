@@ -23,7 +23,7 @@
                   "toc.yml",
                   "*.md"
               ],
-              "dest": "../../green-dashboard-pacific.ghpages"
+              "dest": "../../green-dashboard-pacific.ghpages/manual"
           }
       ],
       "resource": [
