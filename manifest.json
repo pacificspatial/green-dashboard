@@ -255,6 +255,46 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "resources/userMan/a001.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/a001.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/a002.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/a002.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/a003.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/a003.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/a004.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/a004.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "resources/userMan/tutorial_006.png",
       "output": {
         "resource": {
