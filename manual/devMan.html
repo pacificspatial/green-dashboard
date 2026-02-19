@@ -83,7 +83,7 @@
 <p>本書では、樹木管理ダッシュボード（以下「本システム」という。）の利用環境構築手順について記載しています。本システムの構成や仕様の詳細については以下も参考にしてください。</p>
 <p><a href="https://www.mlit.go.jp/plateau/file/libraries/doc/plateau_tech_doc_0030_ver01.pdf">技術検証レポート</a></p>
 <h1 id="2-動作環境">2 動作環境</h1>
-<p>本システムの動作環境は以下のとおりです。</p>
+<p>本システムのサーバサイドの動作環境は以下のとおりです。</p>
 <table>
 <thead>
 <tr>
@@ -95,239 +95,529 @@
 <tbody>
 <tr>
 <td>OS</td>
-<td>Microsoft Windows 10 または 11</td>
+<td>Microsoft Windows 10 以上　または macOS 12 Monterey 以上</td>
 <td>同左</td>
 </tr>
 <tr>
 <td>CPU</td>
-<td>Intel Core i3以上</td>
-<td>Intel Core i5以上</td>
-</tr>
-<tr>
-<td>メモリ</td>
-<td>4GB以上</td>
-<td>8GB以上</td>
-</tr>
-<tr>
-<td>ディスプレイ解像度</td>
-<td>1024×768以上</td>
+<td>Pentium 4 以上</td>
 <td>同左</td>
 </tr>
 <tr>
-<td>ネットワーク</td>
-<td>【解析・シミュレーション】<br>不要<br><br>【集計・適地判定】<br>範囲選択機能を使用しない場合はネットワーク環境は不要<br>範囲選択機能を使用する場合、以下のURLを閲覧できる環境が必要<br>・地理院地図（国土地理院）　<br>http://cyberjapandata.gsi.go.jp<br>・地図表示のため標準地図<br>https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png</td>
+<td>メモリ</td>
+<td>8GB以上</td>
 <td>同左</td>
 </tr>
 </tbody>
 </table>
-<h1 id="3-インストール手順">3 インストール手順</h1>
-<p><a href="https://github.com/Project-PLATEAU/UC22-013-SolarPotential/releases/">こちら</a>
-からアプリケーションをダウンロードします。</p>
-<p>ダウンロード後、zipファイルを右クリックし、「すべて展開」を選択することで、zipファイルを展開します。</p>
-<p>展開されたフォルダ内の「SolarPotential.exe」をダブルクリックすることで、アプリケーションが起動します。</p>
-<p><img src="../resources/userMan/tutorial_028.png" alt=""></p>
-<h1 id="4-ビルド手順">4 ビルド手順</h1>
-<p>自身でソースファイルをダウンロードしビルドを行うことで、実行ファイルを生成することができます。<br>
-ソースファイルは
-<a href="https://github.com/Project-PLATEAU/UC22-013-SolarPotential/">こちら</a>
-からダウンロード可能です。</p>
-<p>GitHubからダウンロードしたソースファイルの構成は以下のようになっています。</p>
-<p><img src="../resources/devMan/tutorial_028.png" alt=""></p>
-<p>（1）本システムのソリューションファイル（SolarPotential.sln）をVisualStudio2019で開きます。</p>
-<p>ソリューションファイルはSRC\EXE\SolarPotential-CS\SolarPotentialに格納されています。</p>
-<p>（2）SolarPotential.slnをVisualStudio2019で開くと、ソリューション'SolarPotential'に6つのプロジェクトが表示されます。</p>
-<p>以下の赤枠部分のように、ソリューション構成を【Release】に、ソリューションプラットフォームを【x64】に設定します。</p>
-<p><img src="../resources/devMan/tutorial_029.png" alt=""></p>
-<p>（3）以下の赤枠部分のように、[ソリューションのビルド]を選択し、ソリューション全体をビルドします。</p>
-<p><img src="../resources/devMan/tutorial_030.png" alt=""></p>
-<p>（4）ビルドが正常に終了すると、ソリューションファイルと同じフォルダにあるbin\Releaseフォルダに実行ファイルが生成されます。</p>
-<p><img src="../resources/devMan/tutorial_031.png" alt=""></p>
-<p>※ダウンロードしたソリューションをビルドする際に、ビルドエラーとなり、次のメッセージが出力されるケースがあります。</p>
-<p>「（ファイル名）を処理できませんでした。インターネットまたは制限付きゾーン内にあるか、ファイルに
-Web のマークがあるためです。これらのファイルを処理するには、Web
-のマークを削除してください。」</p>
-<p>この場合は該当するファイルのプロパティを開き、全般タブ内の「セキュリティ」の項目について[許可する]にチェックを入れてください。</p>
-<p><img src="../resources/devMan/tutorial_032.png" alt=""></p>
-<p>【参考】</p>
-<p>ソースファイルの構成と機能は以下のようになっています。コードを修正する際の参考としてください。</p>
-<p><img src="../resources/devMan/tutorial_033.png" alt=""></p>
-<h1 id="5-準備物一覧">5 準備物一覧</h1>
-<p>アプリケーションを利用するために以下のデータを入手します。</p>
+<p>クライアント（ブラウザ）の動作環境は以下のとおりです。</p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>データ種別</th>
-<th>機能</th>
-<th>用途</th>
-<th>入力方法</th>
+<th>項目</th>
+<th>動作環境</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>①</td>
-<td>3D都市モデル(CityGML)G空間情報センターから取得します。<br> <a href="https://front.geospatial.jp/">https://front.geospatial.jp/</a></td>
-<td>全般</td>
-<td>全般</td>
-<td>格納フォルダパス指定</td>
-</tr>
-<tr>
-<td>②</td>
-<td>月毎の可照時間国立天文台 こよみの計算Webページから取得します。<br> <a href="https://eco.mtk.nao.ac.jp/cgi-bin/koyomi/koyomix.cgi">https://eco.mtk.nao.ac.jp/cgi-bin/koyomi/koyomix.cgi</a></td>
-<td>発電ポテンシャル推計</td>
-<td>日射量の推計</td>
-<td>CSVファイルを手動作成しファイルパス指定</td>
-</tr>
-<tr>
-<td>③</td>
-<td>毎月の平均日照時間気象庁 過去の気象データ・ダウンロードから取得します。<br> <a href="https://www.data.jma.go.jp/gmd/risk/obsdl/index.php">https://www.data.jma.go.jp/gmd/risk/obsdl/index.php</a></td>
-<td>発電ポテンシャル推計</td>
-<td>日射量の推計</td>
-<td>CSVファイルをダウンロードしファイルパス指定</td>
-</tr>
-<tr>
-<td>④</td>
-<td>月毎の積雪深NEDO 日射量データベース閲覧システム METPV-20から取得します。<br> <a href="https://appww2.infoc.nedo.go.jp/appww/index.html">https://appww2.infoc.nedo.go.jp/appww/index.html</a></td>
-<td>発電ポテンシャル推計</td>
-<td>日射量の推計</td>
-<td>CSVファイルを手動作成しファイルパス指定</td>
-</tr>
-<tr>
-<td>⑤</td>
-<td>3D都市モデル(DEMデータ)G空間情報センターから取得します。<br> <a href="https://front.geospatial.jp/">https://front.geospatial.jp/</a></td>
-<td>発電ポテンシャル推計</td>
-<td>日射量の推計</td>
-<td>格納フォルダパス指定</td>
-</tr>
-<tr>
-<td>⑥</td>
-<td>制限区域データ（シェープファイル）<br>（加賀市　景観整備区域・石川県　石川県眺望計画）</td>
-<td>パネル設置適地判定</td>
-<td>パネル設置適地判定</td>
-<td>シェープファイルパス指定</td>
-</tr>
-<tr>
-<td>⑦</td>
-<td>気象関連データ（積雪）(国土数値情報の平年値（気候）メッシュ)</td>
-<td>パネル設置適地判定</td>
-<td>パネル設置適地判定</td>
-<td>シェープファイルをダウンロードしファイルパス指定</td>
+<td>ブラウザ</td>
+<td>Google Chrome 最新版</td>
 </tr>
 </tbody>
 </table>
-<p>本システムでは、3D都市モデルの建築物モデルの形状（LOD1、LOD2）と属性を活用します。</p>
-<p>地形を考慮した解析を行う場合は、地形（LOD1）も活用してください。</p>
+<p>本システムで使用するソフトウェアおよびサービスの一覧は以下のとおりです。</p>
 <table>
 <thead>
 <tr>
-<th>地物</th>
-<th>地物型</th>
-<th>属性区分</th>
-<th>属性名</th>
+<th>種別</th>
+<th>名称</th>
+<th>バージョン</th>
 <th>内容</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>建築物LOD2</td>
-<td>bldg:Building</td>
-<td>空間属性</td>
-<td>bldg:RoofSurface</td>
-<td>建築物のLOD2の屋根面</td>
+<td>オープンソースソフトウェア</td>
+<td><a href="https://httpd.apache.org/">Apache HTTP Server</a></td>
+<td>2.4.58</td>
+<td>Webアプリを配信するためのWebサーバ</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td>bldg:WallSurface</td>
-<td>建築物のLOD2の壁面</td>
+<td>オープンソースソフトウェア</td>
+<td><a href="https://github.com/postgis/postgis">PostGIS</a></td>
+<td>3.4.1</td>
+<td>PostgreSQL で位置情報を扱うための拡張機能</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td>主題属性</td>
-<td>bldg:measuredHeight</td>
-<td>計測高さ</td>
+<td>オープンソースRDBMS</td>
+<td><a href="https://github.com/postgres/postgres">PostgreSQL</a></td>
+<td>16.2</td>
+<td>樹木台帳データ等を格納するリレーショナルデータベース</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td>uro:buildingDisasterRiskAttribute</td>
-<td>災害リスク</td>
+<td>オープンソースライブラリ</td>
+<td><a href="https://github.com/facebook/react">React.js</a></td>
+<td>19.x</td>
+<td>UIを構築するためのJavaScriptライブラリ</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td>uro:buildingID</td>
-<td>建物ID</td>
+<td>オープンソースライブラリ</td>
+<td><a href="https://github.com/maplibre/maplibre-gl-js">MapLibre GL JS</a></td>
+<td>5.x</td>
+<td>地図表示ライブラリ</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td>uro:buildingStructureType</td>
-<td>構造種別</td>
+<td>オープンソースライブラリ</td>
+<td><a href="https://github.com/CesiumGS/cesium">CesiumJS</a></td>
+<td>1.135.x</td>
+<td>3Dビューア用ライブラリ</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td>uro:buildingStructureOrgType</td>
-<td>構造種別（独自）</td>
+<td>商用ライブラリ</td>
+<td><a href="https://ag-grid.com/">AG Grid</a></td>
+<td>34.x</td>
+<td>テーブル表示・集計ライブラリ</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td>uro:BuildingRiverFloodingRiskAttribute</td>
-<td>洪水浸水リスク</td>
+<td>クラウドサービス</td>
+<td><a href="https://firebase.google.com/">Firebase</a></td>
+<td>-</td>
+<td>認証機能（Firebase Authentication）を提供</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td>uro:depth</td>
-<td>浸水深</td>
+<td>商用ソフトウェア</td>
+<td><a href="https://safe.com/">FME Form</a></td>
+<td>2025.1, 2025.2</td>
+<td>データ変換・投入処理</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td>uro:BuildingTsunamiRiskAttribute</td>
-<td>津波浸水リスク</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>uro:depth</td>
-<td>浸水深</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>uro:BuildingLandSlideRiskAttribute</td>
-<td>土砂災害リスク</td>
-</tr>
-<tr>
-<td>建築物LOD1</td>
-<td>bldg:Building</td>
-<td>空間属性</td>
-<td>bldg:lod1Solid</td>
-<td>建築物のLOD1の立体</td>
-</tr>
-<tr>
-<td>地形LOD1</td>
-<td>dem:ReliefFeature</td>
-<td>空間属性</td>
-<td>dem:tin</td>
-<td>地形LOD1の面</td>
+<td>商用クラウド</td>
+<td><a href="https://cesium.com/platform/cesium-ion/">Cesium ion</a></td>
+<td>-</td>
+<td>3Dデータの変換と配信サービス</td>
 </tr>
 </tbody>
 </table>
+<h1 id="3-事前準備">3 事前準備</h1>
+<p>本システムで利用する下記のソフトウェア・サービスを準備します。</p>
+<h2 id="1データベースの準備">（1）データベースの準備</h2>
+<p><a href="https://github.com/postgres/postgres">PostgreSQL</a> を使ってPostgreSQLサーバを起動します。その上で、位置情報を扱うための拡張機能である <a href="https://github.com/postgis/postgis">PostGIS</a> をインストールします。</p>
+<pre><code class="lang-sql">-- PostGIS の有効化
+CREATE EXTENSION IF NOT EXISTS postgis;
+</code></pre>
+<h2 id="2webサーバの準備">（2）Webサーバの準備</h2>
+<p><a href="https://httpd.apache.org/">Apache HTTP Server</a> を使ってWebサーバを起動します。ビルド済みのフロントエンド資材を配信するためのドキュメントルートを設定してください。</p>
+<h2 id="3nodejs-の準備">（3）Node.js の準備</h2>
+<p>フロントエンドのビルドには Node.js が必要です。<a href="https://nodejs.org/">Node.js 公式サイト</a>より、LTS版（v20以上）をインストールしてください。</p>
+<pre><code class="lang-bash"># バージョン確認
+node -v   # v20.x.x 以上であることを確認
+npm -v
+</code></pre>
+<h2 id="4firebase-プロジェクトの準備">（4）Firebase プロジェクトの準備</h2>
+<ol>
+<li><a href="https://console.firebase.google.com/">Firebase コンソール</a>で新規プロジェクトを作成します。</li>
+<li><strong>Authentication</strong> を有効化し、<strong>メール/パスワード</strong> 認証プロバイダを有効にします。</li>
+<li>プロジェクトの設定画面から以下の値を控えます。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>環境変数名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>VITE_FIREBASE_API_KEY</code></td>
+<td>Firebase API キー</td>
+</tr>
+<tr>
+<td><code>VITE_FIREBASE_AUTH_DOMAIN</code></td>
+<td>Firebase Auth ドメイン</td>
+</tr>
+<tr>
+<td><code>VITE_FIREBASE_PROJECT_ID</code></td>
+<td>Firebase プロジェクト ID</td>
+</tr>
+<tr>
+<td><code>VITE_FIREBASE_STORAGE_BUCKET</code></td>
+<td>Firebase Storage バケット</td>
+</tr>
+<tr>
+<td><code>VITE_FIREBASE_APP_ID</code></td>
+<td>Firebase アプリ ID</td>
+</tr>
+<tr>
+<td><code>VITE_FIREBASE_MEASUREMENT_ID</code></td>
+<td>Firebase 計測 ID</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5cesium-ion-の準備">（5）Cesium ion の準備</h2>
+<p>3D都市モデル（3DTiles）を配信するために <a href="https://cesium.com/platform/cesium-ion/">Cesium ion</a> のアカウントを取得し、以下の手順を実施します。</p>
+<ol>
+<li>Cesium ion にサインインし、アセットを登録・公開します。</li>
+<li>アセットIDと、必要に応じてアクセストークンを控えます。</li>
+</ol>
+<h2 id="6fme-form-の準備">（6）FME Form の準備</h2>
+<p><a href="https://safe.com/">FME Form</a> を使用してデータ変換・投入処理を実施します。FME Form は商用ソフトウェアです。業務目的で利用するには、ライセンスの購入が必要です。新規ライセンスの購入については、Pacific Spatial Solutions 株式会社（Safe Software の公式パートナー）にお問い合わせください。</p>
+<h1 id="4-インストール手順">4 インストール手順</h1>
+<h2 id="1リポジトリの取得">（1）リポジトリの取得</h2>
+<p><a href="https://github.com/Project-PLATEAU/green-dashboard">こちら</a>から樹木管理ダッシュボードのソースコードをダウンロードします。</p>
+<pre><code class="lang-bash">git clone https://github.com/Project-PLATEAU/green-dashboard.git
+cd green-dashboard
+</code></pre>
+<h2 id="2環境変数の設定">（2）環境変数の設定</h2>
+<p>プロジェクトルート直下に <code>.env</code> ファイルを作成し、以下の環境変数を設定します。</p>
+<pre><code class="lang-dotenv"># アプリケーション名（任意）
+VITE_PROJECT_NAME=樹木管理ダッシュボード
+VITE_PROJECT_SHORT_NAME=樹木管理
+
+# バックエンドAPIのエンドポイント
+VITE_API_ENDPOINT=https://&lt;サーバのホスト名またはIPアドレス&gt;/api
+
+# Firebase 認証情報（3事前準備（4）で控えた値を設定）
+VITE_FIREBASE_API_KEY=&lt;Firebaseのapi_key&gt;
+VITE_FIREBASE_AUTH_DOMAIN=&lt;Firebaseのauth_domain&gt;
+VITE_FIREBASE_PROJECT_ID=&lt;FirebaseのprojectId&gt;
+VITE_FIREBASE_STORAGE_BUCKET=&lt;FirebaseのstorageBucket&gt;
+VITE_FIREBASE_APP_ID=&lt;FirebaseのappId&gt;
+VITE_FIREBASE_MEASUREMENT_ID=&lt;FirebaseのmeasurementId&gt;
+
+# データ暗号化キー（任意。設定するとローカルストレージのデータを暗号化）
+# VITE_ENCRYPTION_KEY=&lt;任意の文字列&gt;
+
+# デバッグモード（開発時のみ true に設定）
+# VITE_DEBUG=true
+</code></pre>
+<h2 id="3依存ライブラリのインストール">（3）依存ライブラリのインストール</h2>
+<pre><code class="lang-bash">npm install
+</code></pre>
+<p><code>postinstall</code> スクリプトにより、以下の処理が自動的に実行されます。</p>
+<ul>
+<li><code>src/resources</code> を <code>public/resources</code> へコピー</li>
+<li><code>node_modules/cesium/Build/Cesium</code> を <code>src/cesium</code> および <code>public/cesium</code> へコピー</li>
+</ul>
+<h2 id="4ビルド本番環境">（4）ビルド（本番環境）</h2>
+<pre><code class="lang-bash">npm run build
+</code></pre>
+<p>ビルド成果物は <code>dist</code> ディレクトリに出力されます。</p>
+<h2 id="5webサーバへの配置">（5）Webサーバへの配置</h2>
+<p><code>dist</code> ディレクトリの内容を、3（2）で準備したWebサーバのドキュメントルートに配置します。</p>
+<pre><code class="lang-bash"># 例：Apache のドキュメントルートへコピー
+cp -r dist/* /var/www/html/
+</code></pre>
+<p>SPA（シングルページアプリケーション）のため、すべてのリクエストを <code>index.html</code> にフォールバックするよう Apache の設定を行います。</p>
+<pre><code class="lang-apache">&lt;Directory /var/www/html&gt;
+    Options -Indexes
+    AllowOverride All
+&lt;/Directory&gt;
+</code></pre>
+<p><code>.htaccess</code> をドキュメントルートに配置します。</p>
+<pre><code class="lang-apache">&lt;IfModule mod_rewrite.c&gt;
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+&lt;/IfModule&gt;
+</code></pre>
+<h2 id="6開発サーバの起動開発時のみ">（6）開発サーバの起動（開発時のみ）</h2>
+<p>本番環境へのデプロイではなく、ローカル開発環境での動作確認を行う場合は以下のコマンドを実行します。</p>
+<pre><code class="lang-bash">npm run dev
+</code></pre>
+<p>デフォルトでは <code>http://localhost:5173</code> でアプリケーションが起動します。</p>
+<h1 id="5-バックエンドapiの構築">5 バックエンドAPIの構築</h1>
+<p>本システムのフロントエンドは、バックエンドAPIと連携して動作します。バックエンドAPIはPostgreSQLデータベースに接続し、樹木台帳データや文書データ、ユーザ情報等を提供します。</p>
+<h2 id="1データベースの作成">（1）データベースの作成</h2>
+<p>PostgreSQLに接続し、本システム用のデータベースを作成します。</p>
+<pre><code class="lang-sql">CREATE DATABASE green_dashboard ENCODING 'UTF8';
+\c green_dashboard
+CREATE EXTENSION IF NOT EXISTS postgis;
+</code></pre>
+<h2 id="2テーブルの作成">（2）テーブルの作成</h2>
+<p>樹木台帳の主要なデータ項目は以下のとおりです。バックエンドAPIの実装に合わせてテーブルを作成してください。</p>
+<table>
+<thead>
+<tr>
+<th>属性項目</th>
+<th>フィールド名</th>
+<th>データ型</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内部ID</td>
+<td>id</td>
+<td>integer</td>
+<td>主キー</td>
+</tr>
+<tr>
+<td>樹木UID</td>
+<td>uid</td>
+<td>text</td>
+<td>ユニーク識別子</td>
+</tr>
+<tr>
+<td>樹木ID</td>
+<td>tree_id</td>
+<td>text</td>
+<td>管理番号</td>
+</tr>
+<tr>
+<td>路線樹木番号</td>
+<td>route_treenumber</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>座標（位置情報）</td>
+<td>the_geom</td>
+<td>geometry(Point, 4326)</td>
+<td>PostGIS</td>
+</tr>
+<tr>
+<td>樹木タイプ</td>
+<td>type</td>
+<td>text</td>
+<td>高木 / 中木 など</td>
+</tr>
+<tr>
+<td>種名</td>
+<td>name</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>樹高 (m)</td>
+<td>height</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr>
+<td>幅 (m)</td>
+<td>width</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr>
+<td>延長 (m)</td>
+<td>length</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr>
+<td>幹周 (cm)</td>
+<td>circumference</td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td>幹周（複数本）</td>
+<td>circumferences</td>
+<td>jsonb</td>
+<td></td>
+</tr>
+<tr>
+<td>低木種名</td>
+<td>teiboku_names</td>
+<td>text[]</td>
+<td></td>
+</tr>
+<tr>
+<td>低木幅 (m)</td>
+<td>teiboku_width</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr>
+<td>低木延長 (m)</td>
+<td>teiboku_length</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr>
+<td>写真</td>
+<td>tree_photos</td>
+<td>text[]</td>
+<td>画像ファイルパス</td>
+</tr>
+<tr>
+<td>外観診断</td>
+<td>ases_visual</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>腐朽診断</td>
+<td>ases_decay</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>根鉢診断</td>
+<td>ases_root</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>総合判定</td>
+<td>ases_comp</td>
+<td>text</td>
+<td>A / B1 / B2 / C</td>
+</tr>
+<tr>
+<td>枯れ状態</td>
+<td>is_dead</td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>要プレート発注</td>
+<td>is_need_plate</td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>メモ</td>
+<td>memo</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>初回登録日時 (UNIX)</td>
+<td>date_unix</td>
+<td>bigint</td>
+<td></td>
+</tr>
+<tr>
+<td>最終更新日時 (UNIX)</td>
+<td>updated_at_unix</td>
+<td>bigint</td>
+<td></td>
+</tr>
+<tr>
+<td>初回登録ユーザUID</td>
+<td>registered_user_uid</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>初回登録ユーザ名</td>
+<td>registered_user_name</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>初回登録組織UID</td>
+<td>registered_user_office_uid</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>初回登録組織名</td>
+<td>registered_user_office_name</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>最終更新ユーザUID</td>
+<td>updated_user_uid</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>最終更新ユーザ名</td>
+<td>updated_user_name</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>最終更新組織UID</td>
+<td>updated_user_office_uid</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>最終更新組織名</td>
+<td>updated_user_office_name</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>緯度</td>
+<td>latitude</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr>
+<td>経度</td>
+<td>longitude</td>
+<td>float</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="6-初期データの投入">6 初期データの投入</h1>
+<p>本システムの稼働に必要なデータを投入します。</p>
+<h2 id="1樹木台帳データの登録">（1）樹木台帳データの登録</h2>
+<p>既存の樹木台帳データ（CSV、Shapefile 等）を PostgreSQL に格納します。FME Form のワークスペースを使用して変換・投入してください。</p>
+<p><a href="https://github.com/Project-PLATEAU/green-dashboard/blob/main/workspaces/">こちら</a>のワークスペースを FME Form で実行してください。実行の際には PostgreSQL への接続情報を求めるプロンプトが表示されますので、これに従って入力してください。</p>
+<h2 id="23d都市モデルデータの登録cesium-ion">（2）3D都市モデルデータの登録（Cesium ion）</h2>
+<p>3D都市モデル（建物モデル・樹木モデル等）を Cesium ion にアップロードし、配信の準備を行います。</p>
+<ol>
+<li>Cesium ion の管理コンソールにアクセスします。</li>
+<li>対象データ（CityGML、3DTiles等）をアップロードし、タイル変換処理を実行します。</li>
+<li>生成されたアセットIDを控え、バックエンドAPI の環境設定に反映します。</li>
+</ol>
+<h2 id="3ユーザの登録">（3）ユーザの登録</h2>
+<p>本システムはFirebase Authentication でユーザ認証を行います。初期ユーザの登録はバックエンドAPI のユーザ管理機能、またはFirebase コンソールから実施してください。</p>
+<p>ユーザには以下の権限を付与できます。</p>
+<table>
+<thead>
+<tr>
+<th>権限</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web:Read</td>
+<td>Webアプリへのログイン（閲覧のみ）</td>
+</tr>
+<tr>
+<td>Web:Write</td>
+<td>Webアプリへのログイン（編集可能）</td>
+</tr>
+<tr>
+<td>App:Read</td>
+<td>モバイルアプリへのログイン（閲覧のみ）</td>
+</tr>
+<tr>
+<td>App:Write</td>
+<td>モバイルアプリへのログイン（編集可能）</td>
+</tr>
+<tr>
+<td>Data:Export</td>
+<td>データのエクスポート権限</td>
+</tr>
+<tr>
+<td>User:Admin</td>
+<td>ユーザ管理権限</td>
+</tr>
+</tbody>
+</table>
+<h1 id="7-動作確認">7 動作確認</h1>
+<h2 id="1ブラウザからのアクセス">（1）ブラウザからのアクセス</h2>
+<p>WebサーバのURLにブラウザからアクセスし、ログイン画面が表示されることを確認します。</p>
+<pre><code>https://&lt;サーバのホスト名またはIPアドレス&gt;/
+</code></pre>
+<h2 id="2ログイン確認">（2）ログイン確認</h2>
+<p>6（3）で登録したユーザのメールアドレスとパスワードでログインできることを確認します。</p>
+<h2 id="3地図樹木台帳の表示確認">（3）地図・樹木台帳の表示確認</h2>
+<p>ログイン後、地図上に樹木ポイントが表示され、リスト形式での一覧表示ができることを確認します。</p>
 
 </article>
           </div>
