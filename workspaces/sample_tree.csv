@@ -1,0 +1,4 @@
+﻿the_geom,cartodb_id,id,tree_id,name_ja,variant,height,branch_height,width,perimeter,s3_photo,photo,photo_0_so,photo1,photo_1_so,photo_miss,teiboku_na,teiboku_re,remarks,source,_created,_modified,_owner,surveyed,flg_lost,carbon,co2,re_survey,building,citygml_class,citygml_function
+,1,1,10001,クスノキ,,9,3,4,27,,,,,,,,,,,,,,,,,,,,1,12
+,2,2,10002,エゴノキ,,4,1,2,20,,,,,,,,,,,,,,,,,,,,1,22
+,3,3,10003,エノキ,,6,2,5,22,,,,,,,,,,,,,,,,,,,,1,22
