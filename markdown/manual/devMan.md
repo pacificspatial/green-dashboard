@@ -86,10 +86,6 @@ npm -v
 1. Cesium ion にサインインし、アセットを登録・公開します。
 2. アセットIDと、必要に応じてアクセストークンを控えます。
 
-## （6）FME Form の準備
-
-[FME Form](https://safe.com/) を使用してデータ変換・投入処理を実施します。FME Form は商用ソフトウェアです。業務目的で利用するには、ライセンスの購入が必要です。新規ライセンスの購入については、Pacific Spatial Solutions 株式会社（Safe Software の公式パートナー）にお問い合わせください。
-
 # 4 インストール手順
 
 ## （1）リポジトリの取得
@@ -250,9 +246,7 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 
 ## （1）樹木台帳データの登録
 
-既存の樹木台帳データ（CSV、Shapefile 等）を PostgreSQL に格納します。FME Form のワークスペースを使用して変換・投入してください。
-
-[こちら](https://github.com/Project-PLATEAU/green-dashboard/blob/main/workspaces/)のワークスペースを FME Form で実行してください。実行の際には PostgreSQL への接続情報を求めるプロンプトが表示されますので、これに従って入力してください。
+樹木台帳データを PostgreSQL に格納します。
 
 ## （2）3D都市モデルデータの登録（Cesium ion）
 
