@@ -34,7 +34,7 @@
 | オープンソースライブラリ | [CesiumJS](https://github.com/CesiumGS/cesium) | 1.135.x | 3Dビューア用ライブラリ |
 | 商用ライブラリ | [AG Grid](https://ag-grid.com/) | 34.x | テーブル表示・集計ライブラリ |
 | クラウドサービス | [Firebase](https://firebase.google.com/) | - | 認証機能（Firebase Authentication）を提供 |
-| 商用ソフトウェア | [FME Form](https://safe.com/) | 2025.1, 2025.2 | データ変換・投入処理 |
+| 商用ソフトウェア | [FME Form](https://safe.com/) | 2025.1, 2025.2 | データ変換 |
 | 商用クラウド | [Cesium ion](https://cesium.com/platform/cesium-ion/) | - | 3Dデータの変換と配信サービス |
 
 # 3 事前準備
