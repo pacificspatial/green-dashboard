@@ -5,7 +5,7 @@
 ## 更新履歴
 | 更新日時     | リリース       | 更新内容                                       |
 |-------------|--------------|----------------------------------------------|
-| 2026/3/**  | 1st Release  | 初版リリース |
+| 2026/3/19  | 1st Release  | 初版リリース |
 
 
 ## 1. 概要 
@@ -96,7 +96,7 @@
 | package.json                       | 依存ライブラリ定義            |
 | package-lock.json                  | 依存固定定義               |
 | eslint.config.js                   | Lint設定               |                                | 
-| workspaces  |  FME Form で実行するワークスペース                                                                                                                                                                                                                                                                                 | 
+| workspaces  |  FME Form で実行するワークスペース （樹木CSVデータをPLATEAU CityGML植生モデルLOD1,2および3DTiles,STLに変換）                                                                                                                                                                                                                                                                                | 
 
 ## 8. ライセンス
 
