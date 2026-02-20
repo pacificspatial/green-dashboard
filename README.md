@@ -49,7 +49,6 @@
 |               | [React.js](https://github.com/facebook/react/releases) | 18.2.0         | JavaScriptのフレームワーク内で機能するUIを構築するためのライブラリ |
 | オープンソースRDBMS  | [PostgreSQL](https://github.com/postgres/postgres)     | 16.2           | 各種配信するデータを格納するリレーショナルデータベース             |
 | 商用ソフトウェア      | [FME Form](https://safe.com/)                          | 2025.1, 2025.2 | ファイル変換などの処理およびその自動化を行う                  |
-|               | [FME Flow](https://safe.com/)                          | -              | FME Formで構築した処理フローをサーバーで実行する            |
 |               | [Cesium ion](https://cesium.com/platform/cesium-ion/)  | -              | 3Dデータの変換と配信のクラウドサービス                    |
 | 商用ライブラリ       | [AG Grid](https://ag-grid.com/)                        | 31.1.1         | JavaScriptで集計、フィルタリング等を行うためのライブラリ       |
 | クラウドサービス      | [Firebase](https://firebase.google.com/)               | -              | 認証機能を提供するクラウドサービス         |
@@ -97,7 +96,7 @@
 | package.json                       | 依存ライブラリ定義            |
 | package-lock.json                  | 依存固定定義               |
 | eslint.config.js                   | Lint設定               |                                | 
-| workspaces  |  FME Form で実行するWorkspaceとFME Flowの設定に使用するプロジェクトファイル                                                                                                                                                                                                                                                                                                                             | 
+| workspaces  |  FME Form で実行するワークスペース                                                                                                                                                                                                                                                                                 | 
 
 ## 8. ライセンス
 
@@ -112,4 +111,4 @@
 
 ## 10. 参考資料
 - 技術検証レポート: https://www.mlit.go.jp/plateau/file/libraries/doc/****.pdf
-- PLATEAU WebサイトのUse caseページ「樹木データを活用した温熱環境シミュレータの開発」: https://www.mlit.go.jp/plateau/use-case/uc24-17/
+- PLATEAU WebサイトのUse caseページ「樹木データを活用した温熱環境シミュレータの開発」: https://www.mlit.go.jp/plateau/use-case/uc25-11/
