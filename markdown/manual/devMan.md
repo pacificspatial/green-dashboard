@@ -240,7 +240,7 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 
 樹木台帳データを PostgreSQL に格納します。
 
-## （2）3D都市モデルデータの登録（Cesium ion）
+## （2）3D都市モデルデータの登録
 
 3D都市モデル（建物モデル・樹木モデル等）を Amazon S3 に格納します。
 
