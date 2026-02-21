@@ -190,12 +190,6 @@
 <td>2025.1, 2025.2</td>
 <td>データ変換</td>
 </tr>
-<tr>
-<td>商用クラウド</td>
-<td><a href="https://cesium.com/platform/cesium-ion/">Cesium ion</a></td>
-<td>-</td>
-<td>3Dデータの変換と配信サービス</td>
-</tr>
 </tbody>
 </table>
 <h1 id="3-事前準備">3 事前準備</h1>
@@ -253,12 +247,6 @@ npm -v
 </tr>
 </tbody>
 </table>
-<h2 id="5cesium-ion-の準備">（5）Cesium ion の準備</h2>
-<p>3D都市モデル（3DTiles）を配信するために <a href="https://cesium.com/platform/cesium-ion/">Cesium ion</a> のアカウントを取得し、以下の手順を実施します。</p>
-<ol>
-<li>Cesium ion にサインインし、アセットを登録・公開します。</li>
-<li>アセットIDと、必要に応じてアクセストークンを控えます。</li>
-</ol>
 <h1 id="4-インストール手順">4 インストール手順</h1>
 <h2 id="1リポジトリの取得">（1）リポジトリの取得</h2>
 <p><a href="https://github.com/Project-PLATEAU/green-dashboard">こちら</a>から樹木管理ダッシュボードのソースコードをダウンロードします。</p>
@@ -563,12 +551,7 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 <h2 id="1樹木台帳データの登録">（1）樹木台帳データの登録</h2>
 <p>樹木台帳データを PostgreSQL に格納します。</p>
 <h2 id="23d都市モデルデータの登録cesium-ion">（2）3D都市モデルデータの登録（Cesium ion）</h2>
-<p>3D都市モデル（建物モデル・樹木モデル等）を Cesium ion にアップロードし、配信の準備を行います。</p>
-<ol>
-<li>Cesium ion の管理コンソールにアクセスします。</li>
-<li>対象データ（CityGML、3DTiles等）をアップロードし、タイル変換処理を実行します。</li>
-<li>生成されたアセットIDを控え、バックエンドAPI の環境設定に反映します。</li>
-</ol>
+<p>3D都市モデル（建物モデル・樹木モデル等）を Amazon S3 に格納します。</p>
 <h2 id="3ユーザの登録">（3）ユーザの登録</h2>
 <p>本システムはFirebase Authentication でユーザ認証を行います。初期ユーザの登録はバックエンドAPI のユーザ管理機能、またはFirebase コンソールから実施してください。</p>
 <p>ユーザには以下の権限を付与できます。</p>
