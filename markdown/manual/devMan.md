@@ -35,7 +35,6 @@
 | 商用ライブラリ | [AG Grid](https://ag-grid.com/) | 34.x | テーブル表示・集計ライブラリ |
 | クラウドサービス | [Firebase](https://firebase.google.com/) | - | 認証機能（Firebase Authentication）を提供 |
 | 商用ソフトウェア | [FME Form](https://safe.com/) | 2025.1, 2025.2 | データ変換 |
-| 商用クラウド | [Cesium ion](https://cesium.com/platform/cesium-ion/) | - | 3Dデータの変換と配信サービス |
 
 # 3 事前準備
 
@@ -78,13 +77,6 @@ npm -v
 | `VITE_FIREBASE_STORAGE_BUCKET` | Firebase Storage バケット |
 | `VITE_FIREBASE_APP_ID` | Firebase アプリ ID |
 | `VITE_FIREBASE_MEASUREMENT_ID` | Firebase 計測 ID |
-
-## （5）Cesium ion の準備
-
-3D都市モデル（3DTiles）を配信するために [Cesium ion](https://cesium.com/platform/cesium-ion/) のアカウントを取得し、以下の手順を実施します。
-
-1. Cesium ion にサインインし、アセットを登録・公開します。
-2. アセットIDと、必要に応じてアクセストークンを控えます。
 
 # 4 インストール手順
 
@@ -250,11 +242,7 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 
 ## （2）3D都市モデルデータの登録（Cesium ion）
 
-3D都市モデル（建物モデル・樹木モデル等）を Cesium ion にアップロードし、配信の準備を行います。
-
-1. Cesium ion の管理コンソールにアクセスします。
-2. 対象データ（CityGML、3DTiles等）をアップロードし、タイル変換処理を実行します。
-3. 生成されたアセットIDを控え、バックエンドAPI の環境設定に反映します。
+3D都市モデル（建物モデル・樹木モデル等）を Amazon S3 に格納します。
 
 ## （3）ユーザの登録
 
