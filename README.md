@@ -33,7 +33,7 @@
 
 #### ③集計表、エクスポート　
 - 予め設定した条件に応じて自動集計した結果を表示します
-- 集計した結果は、、Excel形式でダウンロードできます。
+- 集計した結果は、Excel形式でダウンロードできます。
 
 ### 【文書管理】
 #### ①文書管理（リスト表示）
@@ -45,7 +45,6 @@
 | ------------- | ------------------------------------------------------ | -------------- | --------------------------------------- |
 | オープンソースソフトウェア | [Apache HTTP Server](https://httpd.apache.org/)        | 2.4.58         | Webアプリで配信を行うためのWebサーバーソフトウェア            |
 | オープンソースソフトウェア | [PostGIS](https://github.com/postgis/postgis)          | 3.4.1          | PostgreSQLで位置情報を扱うことを可能とする拡張機能          |
-| オープンソースライブラリ  | [CesiumJS](https://github.com/CesiumGS/cesium)         | 1.115          | 3Dビューワ上にデータを描画するためのライブラリ                |
 | オープンソースライブラリ  | [CesiumJS](https://github.com/CesiumGS/cesium)         | 1.115          | 3Dビューワ上にデータを描画するためのライブラリ                |
 | オープンソースライブラリ  | [React.js](https://github.com/facebook/react/releases) | 18.2.0         | JavaScriptのフレームワーク内で機能するUIを構築するためのライブラリ |
 | オープンソースRDBMS  | [PostgreSQL](https://github.com/postgres/postgres)     | 16.2           | 各種配信するデータを格納するリレーショナルデータベース             |
