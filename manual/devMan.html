@@ -80,8 +80,7 @@
 <h1 id="環境構築手順書">環境構築手順書</h1>
 
 <h1 id="1-本書について">1 本書について</h1>
-<p>本書では、樹木管理ダッシュボード（以下「本システム」という。）の利用環境構築手順について記載しています。本システムの構成や仕様の詳細については以下も参考にしてください。</p>
-<p><a href="https://www.mlit.go.jp/plateau/file/libraries/doc/plateau_tech_doc_0030_ver01.pdf">技術検証レポート</a></p>
+<p>本書では、「樹木管理ダッシュボード」の利用環境構築手順について記載しています。従来、地方公共団体や民間企業が紙やPDFで管理しており、形式や所在が統一されていなかった緑地関連データをデータベースで一元的に管理する機能を提供します。</p>
 <h1 id="2-動作環境">2 動作環境</h1>
 <p>本システムのサーバサイドの動作環境は以下のとおりです。</p>
 <table>
@@ -95,17 +94,22 @@
 <tbody>
 <tr>
 <td>OS</td>
-<td>Microsoft Windows 10 以上　または macOS 12 Monterey 以上</td>
+<td>Amazon Linux 2023 以上（AWS EC2）</td>
 <td>同左</td>
 </tr>
 <tr>
 <td>CPU</td>
-<td>Pentium 4 以上</td>
+<td>EC2 インスタンスタイプに依存</td>
 <td>同左</td>
 </tr>
 <tr>
 <td>メモリ</td>
-<td>8GB以上</td>
+<td>EC2 インスタンスタイプに依存（4GB 以上）</td>
+<td>同左</td>
+</tr>
+<tr>
+<td>ストレージ</td>
+<td>AWS S3</td>
 <td>同左</td>
 </tr>
 </tbody>
@@ -138,12 +142,6 @@
 <tbody>
 <tr>
 <td>オープンソースソフトウェア</td>
-<td><a href="https://httpd.apache.org/">Apache HTTP Server</a></td>
-<td>2.4.58</td>
-<td>Webアプリを配信するためのWebサーバ</td>
-</tr>
-<tr>
-<td>オープンソースソフトウェア</td>
 <td><a href="https://github.com/postgis/postgis">PostGIS</a></td>
 <td>3.4.1</td>
 <td>PostgreSQL で位置情報を扱うための拡張機能</td>
@@ -153,12 +151,6 @@
 <td><a href="https://github.com/postgres/postgres">PostgreSQL</a></td>
 <td>16.2</td>
 <td>樹木台帳データ等を格納するリレーショナルデータベース</td>
-</tr>
-<tr>
-<td>オープンソースライブラリ</td>
-<td><a href="https://github.com/facebook/react">React.js</a></td>
-<td>19.x</td>
-<td>UIを構築するためのJavaScriptライブラリ</td>
 </tr>
 <tr>
 <td>オープンソースライブラリ</td>
@@ -193,7 +185,7 @@
 </tbody>
 </table>
 <h1 id="3-事前準備">3 事前準備</h1>
-<p>本システムで利用する下記のソフトウェア・サービスを準備します。</p>
+<p>本システムで利用する下記のソフトウェア・サービスを準備します。なお、「樹木データを活用した温熱環境シミュレータの開発」における他の3つのアプリケーションで構築されたPostGISやFirebase等の環境がある場合は、当該環境をご利用いただくことも可能です。</p>
 <p>（1）データベースの準備</p>
 <p><a href="https://github.com/postgres/postgres">こちら</a>を利用してPostgreSQLサーバを起動します。その上で、位置情報を扱うための拡張機能である <a href="https://github.com/postgis/postgis">PostGIS</a> をインストールします。</p>
 <p>（2）Webサーバの準備</p>
@@ -230,9 +222,9 @@ npm run build
 <h1 id="6-初期データの投入">6 初期データの投入</h1>
 <p>本システムの稼働に必要なデータを投入します。</p>
 <p>（1）樹木台帳データの登録</p>
-<p>樹木台帳データを PostgreSQL に格納します。</p>
+<p>樹木台帳データを PostgreSQL に格納します。スキーマは、技術検証レポートにてご確認ください。</p>
 <p>（2）3D都市モデルデータの登録</p>
-<p>3D都市モデル（建物モデル・樹木モデル等）を Amazon S3 に格納します。</p>
+<p>3D都市モデル（3DTiles、建築物モデル・植生モデル等）を Amazon S3 に格納します。3D都市モデル（3DTiles） は、<a href="https://front.geospatial.jp/">G空間情報センター</a>からダウンロードしてください。植生モデル（LOD1,2）のCityGML、3DTilesは、本リポジトリのFMEワークスペースで作成することが可能です。</p>
 <p>（3）ユーザの登録</p>
 <p>Firebase コンソールまたはバックエンドAPIのユーザ管理機能から初期ユーザを登録します。ユーザには用途に応じて閲覧・編集・管理などの権限を付与してください。</p>
 <h1 id="7-動作確認">7 動作確認</h1>
