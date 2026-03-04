@@ -92,7 +92,6 @@ const ErrorFallback = ({ error }) => {
 
         let stack = []
         stackFrames.forEach(sf => {
-            console.log(sf.fileName, sf.lineNumber, sf.columnNumber)
             const fName = sf.fileName.replace(/^https:\/\/localhost/, '')
             const lNum = sf.lineNumber
             const cNum = sf.columnNumber

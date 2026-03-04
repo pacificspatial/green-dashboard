@@ -21,7 +21,6 @@ const PhoneNumberEditor = ({ value, onValueChange, eventKey }) => {
         } else if (eventKey && eventKey.length === 1) {
             startValue = eventKey;
         } else {
-            // 既存の値を表示形式に変換
             startValue = phoneToJp(value);
         }
 
@@ -29,12 +28,10 @@ const PhoneNumberEditor = ({ value, onValueChange, eventKey }) => {
             startValue = "";
         }
 
-        // 初期値を設定（表示形式のまま）
         if (refInput.current) {
             refInput.current.value = startValue;
         }
 
-        // Backdrop要素が存在しない場合のみフォーカスを当てる
         const hasBackdrop = document.querySelector('.MuiBackdrop-root[aria-hidden="true"]');
         if (!hasBackdrop && refInput.current) {
             refInput.current.focus();

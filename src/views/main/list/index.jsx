@@ -35,7 +35,7 @@ const MainListView = () => {
     const {PostRows, PostOne} = UseApiManager()
     const rootRef = useRef()
     const apiRef = useRef()
-    const isUpdatingInternally = useRef(false) // 内部更新フラグ
+    const isUpdatingInternally = useRef(false)
     const [initialized, setInitialized] = useState()
     const { parseColumnDefs } = UseAgGridManager()
     const headerHeight = useMemo(() => 20, [])
@@ -223,7 +223,7 @@ const MainListView = () => {
         _.waited(() => isUpdatingInternally.current = false, 2)        
     }, [initialized, mainState.columnState])
 
-    useEffect(() => { // 外部からはクリアしかない
+    useEffect(() => {
         if (!initialized || !_.isEmpty(mainState.selectedRows)) { return }
         isUpdatingInternally.current = true
         apiRef.current.deselectAll()

@@ -46,9 +46,6 @@ const MapTreeLayer = ({map, filter, visible, style, onClick, onInit}) => {
         if (!_.isEmpty(appState.user?.area_uids)) {
             isTargetCols.push(`area_uid = ANY(ARRAY[${appState.user.area_uids.map(u => `'${u}'`).join(',')}])`)
         }
-        // if (!_.isEmpty(appState.user?.office_uid)) {
-        //     wheres.push(`(properties->'office_uid' IS NULL OR properties->>'office_uid' = '${appState.user.office_uid}')`)
-        // }
         if (!_.isEmpty(isTargetCols)) {
             isTarget = isTargetCols.join(" OR ")
         }
@@ -76,7 +73,6 @@ const MapTreeLayer = ({map, filter, visible, style, onClick, onInit}) => {
     }, 100), [appState.user, cacheBuster, appState.env])
 
     const initLayer = useCallback(() => {
-        console.log("[Tree]", "init layer", map, url)
         if (!map || !url) { return }
 
         addVectorSource(map, SourceName, url, OverwriteMode.Rewrite)
@@ -144,7 +140,6 @@ const MapTreeLayer = ({map, filter, visible, style, onClick, onInit}) => {
     }, [map, visible])
 
     const updateFilter = useCallback(() => {
-        console.log("[TreeLayer]", "update filter", filter)
         setFilter(map, LayerName, filter)
     }, [map, filter])
 

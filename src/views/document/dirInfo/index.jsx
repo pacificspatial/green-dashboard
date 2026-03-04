@@ -67,7 +67,6 @@ const DocumentsDirInfoView = ({data, onChange, onClose}) => {
     const {Post} = UseApiManager()
     const edited = useMemo(() => {
         const d = diff(originalPermissionRef.current, permissions)
-        console.log("[Diff change data]", d)
         return _.isEmpty(d) ? null : d
     }, [permissions])
     const {openAlert} = useDialog()

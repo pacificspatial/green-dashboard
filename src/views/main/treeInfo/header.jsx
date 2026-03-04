@@ -13,8 +13,6 @@ import {
 import {DispatchEvents} from "@_views/dispatch.js"
 import {eve} from "react-eve-hook"
 
-
-// linear wrapped 共通スタイル
 const commonStyles = {
     root: {
         display: "flex",
@@ -56,7 +54,7 @@ const commonStyles = {
         }
     }
 }
-// linear用差分スタイル
+
 const linearStyles = {
     root: {
         flexDirection: "row",
@@ -74,7 +72,7 @@ const linearStyles = {
         },
     },
 }
-// wrapped用共通スタイル
+
 const wrappedStyles = {
     root: {
         flexDirection: "column",

@@ -13,8 +13,6 @@ import { useEve } from "react-eve-hook";
 import { toast } from "react-toastify"
 import "./list.css"
 
-// Get an instance of `PhoneNumberUtil`.
-
 const styles = {
     root: {
         flexGrow: '1',
@@ -131,7 +129,6 @@ const MainUserList = () => {
     }, [GetRows])
 
     const onAddNewUser = useCallback(() => {
-        console.log("[List]", "received on add new user")
         let rowIndex = 0
         setRowData(prev => {
             if (_.isEmpty(_.last(prev))) {
@@ -144,12 +141,8 @@ const MainUserList = () => {
         _.waited(() => {
             if (!apiRef.current) { return }
 
-            // ページサイズを取得
             const pageSize = apiRef.current.paginationGetPageSize()
-            // 新しい行があるページを計算
             const targetPage = Math.floor(rowIndex / pageSize)
-
-            // そのページに移動
             apiRef.current.paginationGoToPage(targetPage)
             apiRef.current.ensureIndexVisible(rowIndex)
             apiRef.current.setFocusedCell(rowIndex, 'name')
@@ -172,8 +165,6 @@ const MainUserList = () => {
     const onSaveRow = useCallback(() => {
         setLoading(true)
 
-        console.log("[User]", "edit save", edited)
-
         const counts = []
         const aCnt = _.size(edited.filter(e => _.isNil(e.uid) && !e.is_delete))
         const eCnt = _.size(edited.filter(e => !_.isNil(e.uid) && !e.is_delete))
@@ -186,8 +177,7 @@ const MainUserList = () => {
             title: "変更の保存",
             onOk: () => {
                 PutRows("user/bulk", edited)
-                    .then(res => {
-                        console.log("[User]", "bulk update", res)
+                    .then(() => {
                         toast.success("変更を保存しました")
                         onLoad()
                     })

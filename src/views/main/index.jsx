@@ -105,7 +105,6 @@ const MainViewContent = () => {
 
     const updateSelectedTrees = useCallback(() => {
         if (!mainState.selectState) { setSelectedTrees([]) }
-        console.log("[Main]", "update selected trees", mainState.selectState, mainState.filterModel)
         setLoadingSelected(true)
         PostRows('tree/basic', {filterModel: mainState.filterModel})
             .then(rows => {
@@ -136,10 +135,6 @@ const MainViewContent = () => {
             window.removeEventListener("mouseleave", onMouseLeave)
         }
     }, []);
-
-    useEffect(() => {
-        console.log("[Main]", "change info tree", mainState.infoTree)
-    }, [mainState.infoTree]);
 
     useEffect(() => {
         updateSelectedTrees()

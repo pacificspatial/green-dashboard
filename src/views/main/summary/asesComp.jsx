@@ -17,7 +17,6 @@ const UseAsesComp = () => {
         ]
         const width = 90
         appState.env.CLIENT_SUMMARY_RANK_COMP.split(",").map(v => parseInt(v)).forEach((v, i, o) => {
-            console.log(v, i, o)
             const field = `rank_${String.fromCharCode(97 + i)}`
             if (i === 0) {
                 return cols.push({headerName: `${v - 1}cm以下`, field, width})
@@ -34,7 +33,6 @@ const UseAsesComp = () => {
         if (!columnDefs) { return null }
 
         const rows = (await GetRows("tree/comp_rank"))
-        console.log(columnDefs)
         for(const row of rows) {
             columnDefs
                 .filter(v => v.field.startsWith("rank_"))
@@ -47,7 +45,6 @@ const UseAsesComp = () => {
     }, [columnDefs])
 
     useEffect(() => {
-        console.log("[AsesComp]", "initial load")
         if (!columnDefs) { return }
         loadData().then()
     }, [columnDefs]);

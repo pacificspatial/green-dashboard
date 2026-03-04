@@ -63,9 +63,6 @@ export const useDataParser = () => {
     const { state:appState} = useContext(AppDataContext)
 
     const dataParser = useCallback(async (data) => {
-        const defs = appState.columnDefs.filter(d => d.web === true || d.web?.visible)
-
-        console.log(defs)
         return data
     }, [appState.columnDefs])
 

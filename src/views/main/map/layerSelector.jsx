@@ -45,7 +45,6 @@ const LayerSelectorView = ({onChange, layers, style}) => {
                     .map(k => ({...layerDefs[k], id: k}))
                     .sort((v1, v2) => (v1.menuOrder ?? v1.at) - (v2.menuOrder ?? v2.at))
             ).filter(e => !_.isEmpty(e))
-        console.log("[LayerSelector]", "parse items", groupItems)
         return groupItems
     }, [layerDefs, MapLayerMenuGroups, appState.user])
 

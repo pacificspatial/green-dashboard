@@ -21,14 +21,12 @@ import _ from "ansuko"
 import {ErrorBoundary} from "react-error-boundary"
 import ErrorFallback from "./error.jsx"
 
-// ライトテーマを作成
 const lightTheme = createTheme({
     palette: {
-        mode: 'light', // これが重要！
+        mode: 'light',
     },
 });
 
-// dayjsの設定
 dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.tz.setDefault("Asia/Tokyo")

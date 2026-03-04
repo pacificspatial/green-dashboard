@@ -72,12 +72,9 @@ const MainMapboxMapView = ({loadingSelected}) => {
         setInitLayers([])
 
         if (maplibreRef.current) {
-//            console.log("[Map]", "new style", style)
             maplibreRef.current.setStyle(style)
             initializing.current = false
             return
-//        } else {
-//            console.log("[Map]", "init style", style)
         }
 
         let center = [
@@ -98,7 +95,6 @@ const MainMapboxMapView = ({loadingSelected}) => {
             style,
             localIdeographFontFamily: "'Noto Sans JP', 'Roboto'",
         }
-//        console.log("[Map]", "map init", mapOptions)
         const m = new maplibregl.Map(mapOptions)
 
         m.addControl(
@@ -153,7 +149,6 @@ const MainMapboxMapView = ({loadingSelected}) => {
             }
         });
 
-        // エラーイベントリスナーを追加
         m.on('error', (e) => {
             console.error('MapLibre error:', e);
             console.error('Error type:', e.error?.name);
@@ -212,14 +207,12 @@ const MainMapboxMapView = ({loadingSelected}) => {
     }, [])
 
     const onFinishDraw = useCallback(_.debounce(() => {
-        console.log("[Map]", "draw finish", mapDrawRef.current?.getFeatures().features)
-
+        // Nothing to do.
     }, 100), [])
     const onDeleteDraw = onFinishDraw
     const onChangeDraw = useCallback((_id, type) => type === "delete" && onFinishDraw(), [])
 
     const onMoveSelectedTree = useCallback(() => {
-//        console.log("[Map]", "on move selected trees", mainState.selectedTrees)
         if (_.isEmpty(mainState.selectedTrees)) { return }
         if (_.size(mainState.selectedTrees) === 1) {
             maplibreRef.current.flyTo({
@@ -238,8 +231,8 @@ const MainMapboxMapView = ({loadingSelected}) => {
         const bbox = turf.bbox(line)
 
         maplibreRef.current.fitBounds([
-            [bbox[0], bbox[1]], // 南西角 [minLng, minLat]
-            [bbox[2], bbox[3]]  // 北東角 [maxLng, maxLat]
+            [bbox[0], bbox[1]],
+            [bbox[2], bbox[3]],
         ], {
             padding: 50,
             maxZoom: 15
@@ -274,7 +267,6 @@ const MainMapboxMapView = ({loadingSelected}) => {
     }, [mainState.infoTree]);
 
     useEffect(() => {
-//        console.log("[Map]", "update style", style, initializing.current)
         if (!style || initializing.current) { return }
         initializing.current = true
         initMap()

@@ -23,25 +23,14 @@ export const boolIf = (value, defaultValue = false) => {
 
 const AsYouTypeJp = new AsYouType("JP")
 
-/**
- * 電話番号を0x0-xxxx-xxxx形式に変換
- * @param phoneNumber {string}
- * @returns {string}
- */
 export const phoneNumberToJP = (phoneNumber) => phoneNumber ?
     (new AsYouType("JP").input(phoneNumber)
         .replace("+81 ", "0")
         .replace(" ", "-")) : null
 
-/**
- * 電話番号を+81xxxx表記にへんかｎ
- * @param phoneNumber {string}
- * @returns {string}
- */
 export const phoneNumberToITN = (phoneNumber) => phoneNumber ?
     parsePhoneNumber(phoneNumber, "JP").number : null
 
-// 全角英数ー＞半角英数
 export const toHalfWidth = str => validStr(str) ? str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, s =>
     String.fromCharCode(s.charCodeAt(0) - 0xFEE0)) : str
 

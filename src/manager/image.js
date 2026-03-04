@@ -1,14 +1,6 @@
 
 const useImageManager = () => {
 
-    /**
-     *
-     * @param dataUri
-     * @param widthOrBoxSize
-     * @param height
-     * @param isThumb
-     * @return {Promise<String>}
-     */
     const resize = (dataUri, widthOrBoxSize, height = null, isThumb = false) => {
         return new Promise((resolve, reject) => {
             const img = new Image()

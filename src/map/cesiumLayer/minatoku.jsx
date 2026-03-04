@@ -7,7 +7,7 @@ const CesiumMinatokuLayer = ({viewer, enable}) => {
     const tileset = useRef()
 
     const setColor = useCallback(() => {
-        console.log(tileset.current.entities)
+        // Nothing to do.
     }, [])
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const CesiumMinatokuLayer = ({viewer, enable}) => {
         }
 
         Cesium.IonResource.fromAssetId(4194528, {
-            accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzZWQ1ODBmOC1mZTUxLTQ1YjYtOWJmYi1lYWQwNmYyYjkzMTAiLCJpZCI6Nzc3MjAsImlhdCI6MTY0MDUxODAyMH0.zWLiXFgaGXueoHP0tzeDXwp3ys7dqSDqu2l3SlB80PY'
+            accessToken: import.meta.env.VITE_CESIUM_MINATO_ACCESS_TOKEN,
         })
             .then(res => Cesium.Cesium3DTileset.fromUrl(res))
             .then(ts => {

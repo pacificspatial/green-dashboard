@@ -122,15 +122,12 @@ const MainHeaderExportExcelButton = ({styles}) => {
             }
             const abortController = new AbortController()
             const res = await Post('tree/grid', data, {withCount: true, signal: abortController.signal})
-            console.log("[Export]", "download size", _.size(res), startRow, endRow, count, downloadCancelToken.current)
-            console.log(res)
             if (_.size(res) !== 2) {
                 break
             }
             rows = rows.concat(res[0])
             count = res[1]
             setDownloadRate(endRow / count)
-            console.log(_.size(rows), startRow, endRow, count, endRow < count)
        } while(endRow < count)
 
         setDownloadRate(1)
@@ -142,17 +139,14 @@ const MainHeaderExportExcelButton = ({styles}) => {
     }, [])
 
     const onClickListItem = useCallback( async (e) => {
-//        eve(DispatchEvents.MainOnClickExcelExport, {type: e.target.dataset.index})
         setOpenPopover(false)
         if (downloadCancelToken.current) { return }
         downloadCancelToken.current = new AbortController()
 
         try {
             let data
-            // TODO: キャンセルされたときの処理
             switch (e.target.dataset.index) {
                 case ExportType.All:
-//                    toast.info("抽出結果のデータをエクスポートします", {position: "top-right", autoClose: 1500})
                     data = await downloadData()
                     break
                 case ExportType.Filtered:

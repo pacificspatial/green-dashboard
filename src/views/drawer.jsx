@@ -61,16 +61,6 @@ const AppDrawerView = ({width, open, onClose}) => {
                         <ListItemButton onClick={() => setAppMode(AppMode.Documents)}>文書管理</ListItemButton>
                     </ListItem>
                 </List>
-                {/*<Box style={{flexGrow: 1}} />*/}
-                {/*<List style={styles.menu.list}>*/}
-                {/*    <Divider />*/}
-                {/*    <ListItem>*/}
-                {/*        <ListItemButton>設定</ListItemButton>*/}
-                {/*    </ListItem>*/}
-                {/*    <ListItem>*/}
-                {/*        <ListItemButton onClick={onLogout}>ログアウト</ListItemButton>*/}
-                {/*    </ListItem>*/}
-                {/*</List>*/}
             </Box>
         </Drawer>
     )

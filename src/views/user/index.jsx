@@ -120,7 +120,6 @@ const UserViewContent = () => {
 
     useEffect(() => {
         evn.on(DispatchEvents.UserClickOnImport, () => {
-            console.log("import")
             setImportMode(true)
         })
     }, [])

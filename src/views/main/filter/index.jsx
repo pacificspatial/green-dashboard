@@ -53,14 +53,11 @@ const styles = {
 
 const MainFilterView = ({loadingSelected}) => {
 
-    // 使用するstateの取得
     const { state: appState } = useContext(AppDataContext)
     const { state: mainState, setSelectState, setFilterModel } = useContext(MainDataContext)
 
-    // Aggridマネージャ
     const { getFilterComponent } = UseAgGridManager()
 
-    // AgGridマネージャの機能を使ってfilterのコンポーネントを生成
     const filterComponents = useMemo(() => {
         if (_.isEmpty(appState.columnDefs) || _.isEmpty(mainState.filterModel)) { return [] }
         return Object.entries(mainState.filterModel).map(([field, filter]) => {
@@ -70,12 +67,10 @@ const MainFilterView = ({loadingSelected}) => {
         })
     }, [mainState.filterModel, appState.columnDefs])
 
-    // 樹木をクリア
     const onClearSelectedTree = useCallback(() => {
         setSelectState(null)
     }, [])
 
-    // フィルターをクリア
     const onClearFilter = useCallback((field) => {
         setFilterModel({..._.pickBy(mainState.filterModel, (_v, f) => f !== field)})
     }, [mainState.filterModel])
@@ -87,7 +82,6 @@ const MainFilterView = ({loadingSelected}) => {
     return (
         <Box style={styles.root}>
             <Box style={styles.box}>
-                {/*選択樹木の表示*/}
                 {!_.isEmpty(mainState.selectedTrees) && (
                     <Box style={styles.select.box}>
                         {loadingSelected && <BeatLoader size={10} color="#99c" />}
@@ -97,7 +91,6 @@ const MainFilterView = ({loadingSelected}) => {
                         </>)}
                     </Box>
                 )}
-                {/*フィルターの表示*/}
                 <Box style={styles.filter.box}>
                     <Typography style={styles.label}>フィルター：</Typography>
                     {!_.isEmpty(filterComponents) && (

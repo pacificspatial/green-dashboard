@@ -7,24 +7,16 @@ const CesiumTreeLayer = ({viewer, enable}) => {
     const tileset = useRef()
 
     const setColor = useCallback(() => {
-//        console.log(tileset.current.entities)
+        // Nothing to do.
     }, [])
 
     useEffect(() => {
         if (!viewer?.scene || tileset.current || !enable) {
             return
         }
-        
-        // Cesium.Cesium3DTileset.fromIonAssetId(4134997).then(ts => {
-        //     // ts.style = new Cesium.Cesium3DTileStyle({
-        //     //      color: "color('rgba(255, 0, 0, 0.5)')"  // 赤、透明度50%
-        //     // })
-        //     tileset.current = ts
-        //     viewer?.scene?.primitives.add(ts)
-        // })
 
         Cesium.IonResource.fromAssetId(4134997, {
-            accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzZWQ1ODBmOC1mZTUxLTQ1YjYtOWJmYi1lYWQwNmYyYjkzMTAiLCJpZCI6Nzc3MjAsImlhdCI6MTY0MDUxODAyMH0.zWLiXFgaGXueoHP0tzeDXwp3ys7dqSDqu2l3SlB80PY'
+            accessToken: import.meta.env.VITE_CESIUM_TREE_ACCESS_TOKEN,
         })
             .then(res => Cesium.Cesium3DTileset.fromUrl(res))
             .then(ts => {

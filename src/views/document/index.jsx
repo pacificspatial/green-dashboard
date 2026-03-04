@@ -174,8 +174,8 @@ const DocumentsViewContent = () => {
 
     const {getRootProps, getInputProps, isDragActive, open: openFilePicker} = useDropzone({onDrop, noClick: true, disabled: current?.user_permission === "read"})
 
-    const onDirInfo = useCallback(row => {
-        console.log(row)
+    const onDirInfo = useCallback(() => {
+        // Nothing to do.
     }, [])
 
     const onNewFolderSubmit = useCallback(name => {
@@ -206,8 +206,8 @@ const DocumentsViewContent = () => {
         }
     }, [])
 
-    const onCellClick = useCallback((params, e) => {
-        console.log(e, params)
+    const onCellClick = useCallback(() => {
+        // Nothing to do.
     })
 
     const onContextMenu = useCallback(({row}, e) => {
@@ -225,7 +225,7 @@ const DocumentsViewContent = () => {
             headerName: "",
             width: 60,
             renderCell: params => {
-                if (params.row.fullPath.endsWith("/")) { // ディレクトリ
+                if (params.row.fullPath.endsWith("/")) {
                     return <IconButton onClick={() => setPaths(params.row.breadcrumbs.paths)}><FolderIcon /></IconButton>
                 }
                 return <IconButton onClick={() => openFile(params.row.fullPath)}><FileIcon /></IconButton>
@@ -285,7 +285,6 @@ const DocumentsViewContent = () => {
         })
         const files = (current.files ?? []).map(v => ({...v, id: v.fullPath}))
         const res =  [...files, ...dirs].filter(Boolean)
-        console.log("[Documents]", "refresh rows", res)
         return res
     }, [current])
 
@@ -354,14 +353,6 @@ const DocumentsViewContent = () => {
     useEffect(() => {
         loadTree()
     }, []);
-
-    useEffect(() => {
-        console.log("[Documents]", "tree", tree)
-    }, [tree]);
-
-    useEffect(() => {
-        console.log("[UploadStatues]", "changed", uploadStatuses)
-    }, [uploadStatuses])
 
     useEveListen(EVENT_FINISH_JOB, () => {
         clearTimeout(updateTimer)

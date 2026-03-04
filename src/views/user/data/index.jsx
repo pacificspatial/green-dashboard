@@ -10,7 +10,6 @@ export const UserDataProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState, state => {
         const savedData = localStorage.getItem(LOCAL_STORAGE_KEY)
         if (!savedData) {
-            // 過去バージョンのlocalStorageを消す
             const keys = []
             for (let i = 0; i < localStorage.length; i++) {
                 if (localStorage.key(i).match(new RegExp(LOCAL_STORAGE_PATTERN))) {

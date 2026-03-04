@@ -67,7 +67,6 @@ const MapAsesCompCLayer = ({map, filter, visible, style, onClick, onInit}) => {
     }, 100), [appState.user, cacheBuster, appState.env])
 
     const updateVisible = useCallback(() => {
-        console.log("[AsesComp]", "update visible", visible)
         setVisible(map, LayerName, visible)
     }, [map, visible])
 
@@ -81,7 +80,6 @@ const MapAsesCompCLayer = ({map, filter, visible, style, onClick, onInit}) => {
 
     const initLayer = useCallback(() => {
         if (!map || !url) { return }
-        console.log("[AsesComp]", "init layer started")
         addVectorSource(map, SourceName, url, OverwriteMode.Rewrite)
         addLayer(map, {
             id: LayerName.Circle.id,

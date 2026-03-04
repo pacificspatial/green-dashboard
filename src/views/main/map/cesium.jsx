@@ -10,8 +10,8 @@ import {AppDataContext} from "@team4am/fp-core"
 import {MAP_CENTER_LOCAL_STORAGE_KEY} from "@_views/main/map/mapbox"
 import _ from "ansuko"
 
-Cesium.Ion.defaultAccessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5N2UyMjcwOS00MDY1LTQxYjEtYjZjMy00YTU0ZTg5MmViYWQiLCJpZCI6ODAzMDYsImlhdCI6MTY0Mjc0ODI2MX0.dkwAL1CcljUV7NA7fDbhXXnmyZQU_c-G5zRx8PtEcxE"
+Cesium.Ion.defaultAccessToken = 
+    import.meta.env.VITE_CESIUM_DEFAULT_ACCESS_TOKEN
 window.CESIUM_BASE_URL = "./cesium/"
 
 const basemapDef =  {
@@ -20,8 +20,7 @@ const basemapDef =  {
     type: "basemap",
     index: 1,
     asset_id: 770371,
-    access_token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5N2UyMjcwOS00MDY1LTQxYjEtYjZjMy00YTU0ZTg5MmViYWQiLCJpZCI6ODAzMDYsImlhdCI6MTY0Mjc0ODI2MX0.dkwAL1CcljUV7NA7fDbhXXnmyZQU_c-G5zRx8PtEcxE",
+    access_token: import.meta.env.VITE_CESIUM_DEFAULT_ACCESS_TOKEN,
     version: "2023/10/4",
 }
 
@@ -31,8 +30,8 @@ const MainCesiumMapView = ({}) => {
     const mapRef = useRef()
     const { state: appState } = useContext(AppDataContext)
 
-    const onFeatureClick = useCallback(e => {
-        console.log(e)
+    const onFeatureClick = useCallback(() => {
+        // Nothing to do.
     }, [])
 
     const { viewer, zoomToHeight } = useCesium({
@@ -43,12 +42,11 @@ const MainCesiumMapView = ({}) => {
 
     const initLayer = useCallback(() => {
         if (!viewer) { return }
-        console.log("Init Layer function")
+        // Nothing to do.
     })
 
     useEffect(() => {
         if (!viewer) { return }
-
 
         let center = [
             _.toNumber(appState.env.CLIENT_MAP_CENTER_LONGITUDE),
@@ -60,7 +58,6 @@ const MainCesiumMapView = ({}) => {
             center = (JSON.parse(lCenter)).center.map(l => _.toNumber(l))
             height = zoomToHeight(_.toNumber(JSON.parse(lCenter).zoom), center[1])
         }
-        console.log("[Cesium]", "center", center, height)
         const destination = Cesium.Cartesian3.fromDegrees(center[0], center[1], height)
         const orientation = {
             heading: Cesium.Math.toRadians(0),

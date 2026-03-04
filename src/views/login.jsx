@@ -69,7 +69,6 @@ const LoginView = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then(() => setLoading(false))
             .catch(e => {
-                console.log(e.code)
                 switch(e.code) {
                     case "auth/invalid-credential":
                         setLoginError("メールアドレスかパスワードが間違っています")

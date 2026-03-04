@@ -158,7 +158,6 @@ const MainHeaderView = ({
 
 
     const onUserMenuClicked = useCallback((e,v) => {
-        console.log(e.target.value, v)
         setOpenUserMenu(false)
     }, [])
 

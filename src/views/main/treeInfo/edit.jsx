@@ -39,7 +39,6 @@ const TreeInfoEditView = () => {
                 const editable = getDefParameter(colDef, treeData, "editable", "boolean", false)
                 const hide = getDefParameter(colDef, treeData, "hide", "boolean", false)
                 const visible = getDefParameter(colDef, treeData, "visible", "boolean", true)
-                console.log("[TreeInfoEditor]", "filter", colDef.field, visible, editable, hide)
                 if (!visible || !editable || hide) { return false }
                 if (colDef.web !== false) { return true }
             }).map(colDef => {
@@ -79,7 +78,6 @@ const TreeInfoEditView = () => {
                 const editable = getDefParameter(colDef, treeData, "editable", "boolean", false)
                 const hide = getDefParameter(colDef, treeData, "hide", "boolean", false)
                 const visible = getDefParameter(colDef, treeData, "visible", "boolean", true)
-                console.log("[TreeInfoEditor]", "filter", colDef.field, visible, editable, hide)
                 if (!visible || !editable || hide) { return false }
                 if (colDef.web !== false) { return true }
             })
@@ -97,7 +95,6 @@ const TreeInfoEditView = () => {
                 } else if (dataType && _.has(formEditors, dataType)) {
                     Comp = formEditors[dataType]
                 }
-                console.log("[TreeInfoEditor]", "comp", def.field, Comp, editor, dataType)
                 if (!Comp) { return null }
                 return <Comp key={def.field} colDef={def} source={initialDataRef.current} data={treeData} env={appState.env} onChange={onChangeData} />
             }).filter(Boolean)
@@ -122,10 +119,6 @@ const TreeInfoEditView = () => {
 
 
     useEveListen(DispatchEvents.TreeInfoOnClickReload, loadTree)
-
-    useEffect(() => {
-        console.log("[Update]", "edit data", edited)
-    }, [edited]);
 
     return (
         <TabPanelBase title="編集">
